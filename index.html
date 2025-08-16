@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌿 Plant Disease Detector</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #a8e063, #56ab2f);
+      color: #1a1a1a;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      color: #fff;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    header img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+      border-radius: 50%;
+      background: #e6f2d9;
+      padding: 10px;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      max-width: 480px;
+      text-align: center;
+      margin: 0;
+      color: #d4e8b3;
+      line-height: 1.5;
+    }
+
+    .upload-box {
+      background: #fff;
+      padding: 40px 50px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 480px;
+      min-height: 320px; /* fixed height */
+      transition: transform 0.3s ease;
+    }
+    .upload-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    input[type="file"] {
+      border: none;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+      font-size: 1.1rem;
+      color: #555;
+      background: #f9fff0;
+    }
+    input[type="file"]:hover {
+      border-color: #56ab2f;
+    }
+    input[type="file"]::file-selector-button {
+      cursor: pointer;
+      background: #56ab2f;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    input[type="file"]::file-selector-button:hover {
+      background: #3a7d16;
+    }
+
+    button {
+      margin-top: 30px;
+      background: #56ab2f;
+      color: white;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(86, 171, 47, 0.5);
+      cursor: pointer;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      align-self: center;
+    }
+    button:hover {
+      background: #3a7d16;
+      box-shadow: 0 12px 25px rgba(58, 125, 22, 0.7);
+    }
+
+    .result, .error {
+      margin-top: 30px;
+      padding: 25px 30px;
+      border-radius: 18px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-align: center;
+      min-height: 80px; /* fixed height for consistent UI */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .result {
+      background: #f0fff0;
+      color: #2e7d32;
+      border: 2px solid #56ab2f;
+    }
+
+    .error {
+      background: #ffe5e5;
+      color: #b30000;
+      border: 2px solid #ff4c4c;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 30px 15px;
+      }
+      .upload-box {
+        padding: 30px 25px;
+        min-height: auto;
+      }
+      button {
+        width: 100%;
+        padding: 14px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/415/415733.png" alt="Plant Icon" />
+    <h1>🌿 Plant Disease Detection</h1>
+    <p>Upload a plant leaf image and let the AI detect the disease accurately and quickly.</p>
+  </header>
+
+  <div class="upload-box">
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept="image/*" required />
+      <button type="submit">🔍 Predict</button>
+    </form>
+  </div>
+
+  {% if prediction %}
+    <div class="result">
+      <h2>Prediction:</h2>
+      <p><strong>{{ prediction }}</strong></p>
+    </div>
+  {% endif %}
+
+  {% if error %}
+    <div class="error">
+      <p>Error: {{ error }}</p>
+    </div>
+  {% endif %}
+</body>
+</html>
