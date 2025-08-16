@@ -40,3 +40,11 @@ Applied transfer learning for the first time.
 Learned how pretrained models improve accuracy.
 
 Deployed a DL model with Flask.
+
+## 🔗 Model File
+
+The trained model (`plant_disease_model.h5`) is too large for GitHub.  
+You can download it from [Google Drive] https://drive.google.com/file/d/1Bz66_UIzx3sWufgP-WES78bk9Q8YLGYt/view?usp=drive_link  
+
+Place it in the project root folder before running `app.py`.
+
